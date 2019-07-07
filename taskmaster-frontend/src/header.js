@@ -1,9 +1,9 @@
 import React from 'react';
-class header extends React.Component{
+class Header extends React.Component{
   render(){
     return(
       <header> Task manager </header>
     );
   }
 }
-export default header;
+export default Header;

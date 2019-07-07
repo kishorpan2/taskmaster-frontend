@@ -1,28 +1,31 @@
 import React,{useState, useEffect} from 'react';
-import './app.css';
-import './header'
+import './app.scss';
+import logo from './logo.svg'
+import Header from './header'
 
 const API ='http://task.us-west-2.elasticbeanstalk.com/task'
 
-function Tasks(){
-  const [tasks, setTasks] = useState([]);
-  const _getTasks = () =>{
+function Task(){
+  const [task, setTask] = useState([]);
+  const getTask = () =>{
     fetch(API, {
-     mode:'cors' ,
+     mode:'cors',
     })
-    .then(data => data.json())
-    .then(tasks => setTasks(tasks))
+    .then(data => data.json() )
+    .then(task => setTask(task) )
     .catch(console.error);
 
   };
-  useEffect(_getTasks, []);
+  useEffect(getTask, []);
+
   return(<ul>
-    {tasks.map((listedTask)=>
-      <li> key={listedTask.id}
-      <p>Task:{listedTask.title}</p>
-      <p>Description: {listedTask.description}</p>
-      <p>Status: {listedTask.status}</p>
-      <p>Assignee: {listedTask.assignee}</p>
+
+    {task.map((list)=>
+      <li key={list.id}>
+      <p>Task:{list.title}</p>
+      <p>Description: {list.description}</p>
+      <p>Status: {list.status}</p>
+      <p>Assignee: {list.assignee}</p>
 
       </li>
       )}
@@ -32,8 +35,10 @@ function Tasks(){
 function App() {
   return (
     <>
-    <header />
-    <main><Tasks /></main>
+    <Header />
+
+        <Task />
+
     </>
   );
 }
