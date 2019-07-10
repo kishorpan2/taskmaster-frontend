@@ -11,5 +11,8 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "scripts": {
+    "deploy": "npm run build && /usr/local/bin/aws s3 sync build/ s3://taskmasterfrontendpandey"
+  }
 }

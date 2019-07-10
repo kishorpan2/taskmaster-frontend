@@ -4,6 +4,7 @@ import logo from './logo.svg'
 import Header from './header'
 
 const API ='http://task.us-west-2.elasticbeanstalk.com/task'
+//const API='http://localhost:5000/task'
 
 function Task(){
 
@@ -22,17 +23,28 @@ function Task(){
   useEffect(_getTask, []);
 
   return(
-      <ul>
-        {task.map((list) =>
-          <li key={list.id}>
-              <p>Task:{list.title}</p>
-              <p>Description: {list.description}</p>
-              <p>Status: {list.status}</p>
-              <p>Assignee: {list.assignee}</p>
-          </li>
-          )}
-      </ul>
-  )
+    <div className="App">
+
+     {task.map( (eachTask) =>
+
+              <li key={eachTask.id}>
+                      <p>Task: {eachTask.title}</p>
+                      <p>Description: {eachTask.description}</p>
+                      <p>Status: {eachTask.status}</p>
+                      <p>Assignee: {eachTask.assignee}</p>
+                      <img src={eachTask.imageUrl} />
+                      <form action={`${API}s/${eachTask.id}/images`} method="post" encType="multipart/form-data">
+                      <label>
+                        <span>Upload Image</span>
+                        <input name="file" type="file" />
+                      </label>
+                      <button>Save</button>
+                       </form>
+               </li>
+)
+}
+</div>
+)
 }
 
 function App() {
